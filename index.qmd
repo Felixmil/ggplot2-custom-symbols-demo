@@ -1,5 +1,5 @@
 ---
-title: "Custom font in ggplot"
+title: "Custom font in ggplot without using `{showtext}`"
 format: 
   html:
       page-layout: "full"
@@ -23,6 +23,34 @@ None of this is necessary when just executed from R code because the device is m
 ```{r}
 knitr::opts_chunk$set(dev = "ragg_png")
 ```
+
+
+
+::: {.callout-tip}
+The options for all kind of outputs can be easily set all at once in the yaml headers of the `.Rmd/.qmd` file.
+
+```
+format:
+  # for html outputs
+  html:
+    knitr:
+      opts_chunk:
+        dev: "ragg_png"
+  # for PDFs
+  pdf:
+    knitr:
+      opts_chunk:
+        dev: "cairo_pdf"
+  # For word document
+  docx:
+    knitr:
+      opts_chunk:
+        dev: "ragg_png"
+        dpi: 300
+```
+:::
+
+
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(dev = "ragg_png",
