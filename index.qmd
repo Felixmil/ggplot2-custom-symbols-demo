@@ -125,7 +125,7 @@ systemfonts::register_font(name = "fontawesome-brands",
 ```{r}
 penguins %>%
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
-  geom_text(label = "linux", family = "fontawesome-brands")+
+  geom_text(label = "dog", family = "fontawesome")+
   theme(text =  element_text(family = "iaWriter"))
 ```
 
@@ -145,5 +145,8 @@ penguins %>%
 ```
 
 
+# Sources
 
+- https://yjunechoe.github.io/posts/2021-06-24-setting-up-and-debugging-custom-fonts/
+- https://www.youtube.com/watch?v=EIOo6T-Z1Qw&ab_channel=DavidKeyes
 

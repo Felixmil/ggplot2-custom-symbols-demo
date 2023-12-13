@@ -18,7 +18,7 @@
     "href": "index.html#same-symbol-for-all",
     "title": "Custom font in ggplot without using {showtext}",
     "section": "Same symbol for all",
-    "text": "Same symbol for all\n\npenguins %&gt;%\n  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +\n  geom_text(label = \"linux\", family = \"fontawesome-brands\")+\n  theme(text =  element_text(family = \"iaWriter\"))\n\nWarning: Removed 2 rows containing missing values (`geom_text()`)."
+    "text": "Same symbol for all\n\npenguins %&gt;%\n  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +\n  geom_text(label = \"dog\", family = \"fontawesome\")+\n  theme(text =  element_text(family = \"iaWriter\"))\n\nWarning: Removed 2 rows containing missing values (`geom_text()`)."
   },
   {
     "objectID": "index.html#symbol-as-aesthetic",
