@@ -1,0 +1,121 @@
+---
+title: "Custom font in ggplot"
+format: 
+  html:
+      page-layout: "full"
+      self-contained: true
+---
+
+
+
+# Setup for rendering
+
+::: {.callout-important}
+This chunk is absolutely necessary for rendering html from Rmd/quarto documents.
+
+For pdf outputs, use "cairo_pdf" device.
+
+None of this is necessary when just executed from R code because the device is managed through RStudio setting (`Tools > Global Options > Graphics`, `AGG` must be selected there)
+:::
+
+
+
+```{r}
+knitr::opts_chunk$set(dev = "ragg_png")
+```
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(dev = "ragg_png",
+                      fig.align = "center",
+                      fig.width = 7,
+                      fig.asp = 0.618,
+                      fig.retina = 2,
+                      out.width = "80%")
+```
+
+
+# Libraries
+
+```{r, warning=FALSE, message = FALSE}
+library(tidyverse)
+library(palmerpenguins)
+
+
+library(ragg)
+library(systemfonts)
+```
+
+
+# Load Font
+
+```{r}
+systemfonts::register_font(name = "iaWriter",
+                             plain = "iAWriterQuattroS-Regular.ttf" 
+)
+```
+
+
+# Custom font for plot text
+
+```{r}
+#| layout-ncol: 2
+#| fig-cap: 
+#|   - "Before"
+#|   - "After"
+
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  labs(title = "This is the default ggplot2 font") +
+  geom_point()
+
+
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_point() +
+  labs(title = "This is a custom font called iaWriter") +
+  theme(text =  element_text(family = "iaWriter"))
+```
+
+
+
+# Custom font for points
+
+
+## Add fonts
+```{r}
+systemfonts::register_font(name = "fontawesome",
+                           plain = "Font Awesome 6 Free-Solid-900.otf" 
+)
+
+systemfonts::register_font(name = "fontawesome-brands",
+                           plain = "Font Awesome 6 Brands-Regular-400.otf" 
+)
+```
+
+
+## Same symbol for all 
+```{r}
+penguins %>%
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_text(label = "linux", family = "fontawesome-brands")+
+  theme(text =  element_text(family = "iaWriter"))
+```
+
+## Symbol as aesthetic
+
+```{r}
+penguins %>%
+  mutate(shape = case_when(
+    species == "Adelie" ~ "linux",
+    species == "Chinstrap" ~ "twitter",
+    species == "Gentoo" ~ "earlybirds"
+  )) %>%
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_text(aes(label = shape), family = "fontawesome-brands") +
+  guides(color = guide_legend(override.aes = aes(label = "shapes", alpha = 1, family = "fontawesome"))) +
+  theme(text =  element_text(family = "iaWriter"))
+```
+
+
+
+

@@ -1,1 +1,1 @@
-"# ggplot2-custom-symbols-demo" 
+# Demo: use custom symbols in ggplo2

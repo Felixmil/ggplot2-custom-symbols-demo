@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Custom font in ggplot",
+    "section": "",
+    "text": "Important\n\n\n\nThis chunk is absolutely necessary for rendering html from Rmd/quarto documents.\nFor pdf outputs, use “cairo_pdf” device.\nNone of this is necessary when just executed from R code because the device is managed through RStudio setting (Tools &gt; Global Options &gt; Graphics, AGG must be selected there)\n\n\n\nknitr::opts_chunk$set(dev = \"ragg_png\")"
+  },
+  {
+    "objectID": "index.html#add-fonts",
+    "href": "index.html#add-fonts",
+    "title": "Custom font in ggplot",
+    "section": "Add fonts",
+    "text": "Add fonts\n\nsystemfonts::register_font(name = \"fontawesome\",\n                           plain = \"Font Awesome 6 Free-Solid-900.otf\" \n)\n\nsystemfonts::register_font(name = \"fontawesome-brands\",\n                           plain = \"Font Awesome 6 Brands-Regular-400.otf\" \n)"
+  },
+  {
+    "objectID": "index.html#same-symbol-for-all",
+    "href": "index.html#same-symbol-for-all",
+    "title": "Custom font in ggplot",
+    "section": "Same symbol for all",
+    "text": "Same symbol for all\n\npenguins %&gt;%\n  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +\n  geom_text(label = \"linux\", family = \"fontawesome-brands\")+\n  theme(text =  element_text(family = \"iaWriter\"))\n\nWarning: Removed 2 rows containing missing values (`geom_text()`)."
+  },
+  {
+    "objectID": "index.html#symbol-as-aesthetic",
+    "href": "index.html#symbol-as-aesthetic",
+    "title": "Custom font in ggplot",
+    "section": "Symbol as aesthetic",
+    "text": "Symbol as aesthetic\n\npenguins %&gt;%\n  mutate(shape = case_when(\n    species == \"Adelie\" ~ \"linux\",\n    species == \"Chinstrap\" ~ \"twitter\",\n    species == \"Gentoo\" ~ \"earlybirds\"\n  )) %&gt;%\n  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +\n  geom_text(aes(label = shape), family = \"fontawesome-brands\") +\n  guides(color = guide_legend(override.aes = aes(label = \"shapes\", alpha = 1, family = \"fontawesome\"))) +\n  theme(text =  element_text(family = \"iaWriter\"))\n\nWarning: Removed 2 rows containing missing values (`geom_text()`)."
+  }
+]
